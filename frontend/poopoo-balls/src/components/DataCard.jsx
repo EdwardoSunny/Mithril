@@ -5,7 +5,7 @@ function DataCard({item, objects}) {
   return (
     <div className='data-card'>
         <div className="left">
-          <h3>{item}</h3>
+          <h4>{item}</h4>
       <p>{objects} detected objects</p>  
         </div>
         <button className='target'>

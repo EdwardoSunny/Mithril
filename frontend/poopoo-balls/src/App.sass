@@ -68,6 +68,12 @@ h3
   font-weight: 500
   margin: 0
   font-family: 'Alliance No.1', sans-serif
+h4
+  font-size: 16px
+  color: $text-color
+  font-weight: 500
+  margin: 0
+  font-family: 'Alliance No.1', sans-serif
 //! animations
 $hoverAnimate: background-color 200ms ease-in-out
 
@@ -170,8 +176,14 @@ nav
     gap: 22px
   &.visual
     @include grid
-    gap: 22px
+    gap: 12px
     @include grid-row
+    grid-template-columns: repeat(2, 1fr)
+    justify-content: flex-start
+    align-items: start
+    left: 0
+    position: relative
+    top: 0
 .hero
   height: 100vh
   width: 100vw
@@ -229,13 +241,16 @@ button
     &:hover  
       background-color: $hover-sec 
   &.target
-    background: $prim
+    background: $sec
     font-color: #fff
     width: fit-content
-    width: 36px
-    max-height: 36px
-    font-size: 18px
-     
+    width: 30px
+    max-height: 30px
+    font-size: 14px
+.target-contain
+  display: flex
+  flex-direction: column
+  gap: 12px
    
  
 
@@ -257,6 +272,7 @@ button
   color: $lighterText
   background-color: $sec
   &.clickable
+    transition: background-color 200ms ease
     &:hover
       color: #fff
       background-color: $prim
@@ -286,6 +302,13 @@ button
   background-position: top, bottom, left, right
   background-size: 40px 4px, 40px 4px, 4px 40px, 4px 40px
   position: relative
+  transition: background-color 200ms ease, background-image 200ms ease
+  &:hover
+    cursor: pointer
+    background-color: rgba($prim, .1)
+    background-image: linear-gradient(to right, $prim 20px, transparent 20px), linear-gradient(to left, $prim 20px, transparent 20px), linear-gradient(to bottom, $prim 20px, transparent 20px), linear-gradient(to top, $prim 20px, transparent 20px)
+  &:hover .upload-text
+    transform: scale(1.2)
 .upload-text
   color: #fff
   align-content: center
@@ -293,6 +316,7 @@ button
   display: flex
   flex-direction: column
   gap: 12px
+  transition: transform 200ms ease
   & p
     text-align: center
     font-size: 18px
@@ -344,7 +368,7 @@ button
 //* dataset
 .data-card
   border: $border
-  padding: 12px
+  padding: 8px
   background-color: $boxBackground
   height: fit-content
   transition: background-color 200ms ease
@@ -358,11 +382,14 @@ button
     @include flex
     @include flex-column
     gap: 4px
-    
+  & p
+    font-size: 12px
   &:hover
     background-color: rgba($prim, 0.1)
     cursor: pointer
     border: 2px solid $prim
+  &:hover button
+    background-color: $prim
 .dataset-contain
   @include container
   padding: 12px
@@ -370,18 +397,27 @@ button
   width: -webkit-fill-available
   max-height: 500px
   overflow-y: scroll
+.visualization-contain
+  @include container
+  padding: 12px
+  gap: 12px
+  display: flex
+  flex-direction: column
+  width: -webkit-fill-available
+  max-height: 500px
 .main-image img
   height: 80vh
-  width: 76vw
+  width: 74vw
 .original-image-contain
   & img
     width: 320px
-    height: 320px
+    height: 280px
     border-radius: $borderRadius
+    border: 2px solid $prim
 
 .slider-row-contain
   display: flex
   flex-direction: row
   width: 100%
   justify-content: space-between
-  align-content: space-between                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+  align-content: space-between  

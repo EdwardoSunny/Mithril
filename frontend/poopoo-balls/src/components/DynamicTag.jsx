@@ -1,5 +1,5 @@
 function DynamicTag({ tagName, condition }) {
-  return <div className={`tag ${condition}`}>{tagName}</div>;
+  return <div className={`tag clickable ${condition}`}>{tagName}</div>;
 }
 
 export default DynamicTag;

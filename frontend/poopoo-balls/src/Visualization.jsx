@@ -2,6 +2,7 @@ import DataSet from './components/DataSet'
 import IconTag from './components/IconTag'
 import { faCloud, faCloudRain, faSnowflake} from "@fortawesome/free-solid-svg-icons";
 import ReactSlider from "react-slider";
+import VisualizationChart from './components/VisualizationChart';
 
 function Visualization() {
   return (
@@ -20,6 +21,7 @@ function Visualization() {
       >
         
       </DataSet>
+      <VisualizationChart></VisualizationChart>
         </div>
         <div className="right-panel">
           <div className="tag-row">

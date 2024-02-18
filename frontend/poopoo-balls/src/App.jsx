@@ -3,8 +3,11 @@ import "./App.sass";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUpFromBracket } from "@fortawesome/free-solid-svg-icons";
 import Visualization from "./Visualization";
+// Assuming DynamicTag component is properly imported
+import DynamicTag from "./components/DynamicTag";
 
 function App() {
+  const [isVisualizationShown, setIsVisualizationShown] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(null); // Track upload progress
   const [file, setFile] = useState(null); // Track the selected file
 
@@ -18,73 +21,47 @@ function App() {
     }
   };
 
+  // Function to handle button click to switch to visualization
+  const handleAnalyzeDataClick = () => {
+    setIsVisualizationShown(true); // Change state to show the visualization page
+  };
+
   // Trigger the hidden file input when the upload area is clicked
   const handleClick = () => {
     document.getElementById('fileInput').click();
   };
 
-  // Handle the upload process to your endpoint
-  const handleUpload = async () => {
-    if (file) {
-      const formData = new FormData();
-      formData.append('file', file);
-    
-      try {
-        const response = await fetch('http://127.0.0.1:5000/upload', {
-          method: 'POST',
-          body: formData,
-        });
-  
-        if (response.ok) {
-          console.log('Upload successful');
-          // Handle successful upload here
-        } else {
-          // If response is not ok, attempt to parse the error message from the response body
-          let errorMessage;
-          try {
-            const errorData = await response.json();
-            errorMessage = errorData.message; // Assuming the server sends error messages in a 'message' field
-          } catch (error) {
-            errorMessage = 'Unknown error occurred'; // Fallback message if parsing fails
-          }
-  
-          console.error('Upload failed:', errorMessage);
-          // Handle upload error here
-        }
-      } catch (error) {
-        console.error('Error:', error);
-        // Handle network errors here
-      }
-    }
-  };
-  
-
   return (
     <>
-      <div className="page upload" style={{ padding: "22px 390px" }}>
-        <h2 style={{ textAlign: "center" }}>Upload Images to Analyze</h2>
-        <div className="upload-contain" onClick={handleClick}>
-          <div className="upload-box">
-            <div className="upload-text">
-              <div className="icon-contain" style={{display:"flex", justifyContent: "center" }}>
-                <FontAwesomeIcon
-                  icon={faArrowUpFromBracket}
-                  style={{ fontSize: "32px", textAlign: "center" }}
-                />
-              </div>
-              <p>Click to Drop Images</p>
-              <input type="file" id="fileInput" style={{ display: 'none' }} onChange={handleFileChange} accept=".zip" />
+      {!isVisualizationShown ? (
+        <div className="page upload" style={{ padding: "22px 390px" }}>
+          <h2 style={{ textAlign: "center" }}>Upload an image to analyze</h2>
+          <div className="upload-contain" onClick={handleClick}>
+            <div className="tag-row">
+              <DynamicTag condition="primary" tagName="Labeled image"></DynamicTag>
+              <DynamicTag condition="" tagName="Unlabeled image"></DynamicTag>
             </div>
+            <div className="upload-box">
+              <div className="upload-text">
+                <div className="icon-contain" style={{display:"flex", justifyContent: "center" }}>
+                  <FontAwesomeIcon icon={faArrowUpFromBracket} style={{ fontSize: "32px", textAlign: "center" }}/>
+                </div>
+                <p>Drop a photograph here</p>
+                <input type="file" id="fileInput" style={{ display: 'none' }} onChange={handleFileChange} accept="image/*" />
+              </div>
+            </div>
+            {uploadProgress && (
+              <div className="loading-contain">
+                <h3>Files have been uploaded</h3>
+                <p>{uploadProgress} uploaded</p>
+              </div>
+            )}
           </div>
+          <button className="primary" onClick={handleAnalyzeDataClick}>Analyze data</button>
         </div>
-        <div className="loading-contain">
-          <h3>{uploadProgress ? 'Files have been uploaded' : 'Click above to upload files'}</h3>
-          {uploadProgress && <p>{uploadProgress} uploaded</p>}
-        </div>
-        <button className="primary" onClick={handleUpload}>Analyze data</button>
-      </div> 
-
-      <Visualization />
+      ) : (
+        <Visualization />
+      )}
     </>
   );
 }
