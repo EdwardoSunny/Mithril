@@ -1,0 +1,387 @@
+//* root element styling
+@font-face  
+  font-family: 'AllianceNo2' 
+  src: url('/font/AllianceNo2-Regular copy.ttf') format('truetype') 
+  font-weight: 400 
+  font-style: normal 
+ 
+
+@font-face  
+  font-family: 'AllianceNo2' 
+  src: url('/font/AllianceNo2-Bold copy.ttf') format('truetype') 
+  font-weight: 700 
+  font-style: normal 
+ 
+
+@font-face  
+  font-family: 'AllianceNo2' 
+  src: url('/font/AllianceNo2-Medium copy.ttf') format('truetype') 
+  font-weight: 500 
+  font-style: normal 
+ 
+
+@font-face  
+  font-family: 'AllianceNo2' 
+  src: url('/font/AllianceNo2-SemiBold copy.ttf') format('truetype') 
+  font-weight: 600 
+  font-style: normal 
+ 
+
+@font-face 
+  font-family: 'AllianceNo2' 
+  src: url('/font/AllianceNo2-Light copy.ttf') format('truetype') 
+  font-weight: 300 
+  font-style: normal 
+
+//! colors
+$bg: #0B0D0C
+$text-color: #fff
+$prim: #00BFA8
+$hover-prim: #0A8B7C
+$sec: #404242 
+$hover-sec: #2d2f2f 
+$boxBackground: #151716
+$outlineColor: rgba(255, 255, 255, .1)
+$border: 2px solid $outlineColor
+$borderRadius: 4px
+$lighterText: rgba(255, 255, 255, .75)
+//! text
+$buttons: 22px
+$spanText: blue
+h1
+  font-size: 48px
+  color: $text-color
+  font-weight: 500
+  margin: 0
+  font-family: 'Alliance No.1', sans-serif
+h2
+  font-size: 28px
+  color: $text-color
+  font-weight: 500
+  margin: 0
+  font-family: 'Alliance No.1', sans-serif
+  &span 
+    color: $spanText
+h3
+  font-size: 20px
+  color: $text-color
+  font-weight: 500
+  margin: 0
+  font-family: 'Alliance No.1', sans-serif
+//! animations
+$hoverAnimate: background-color 200ms ease-in-out
+
+//* core elements
+html,
+body  
+  margin: 0 
+  overflow-x: hidden 
+  font-family: Inter, sans-serif
+  background-color: $bg
+img
+  border-radius: $borderRadius
+p
+  color: $lighterText
+  font-size: 14px
+  margin: 0
+//* light and dark mode
+@mixin color-themes($theme)  
+  @if $theme == "light"  
+    background-color: $bg
+  @else  
+    background-color: $bg
+
+ 
+
+//* nav
+nav  
+  width: 100% 
+  height: fit-content 
+  padding: 22px
+  position: fixed
+  top: 0
+  backdrop-filter: blur(10px)
+  ul  
+    margin: 0 
+    padding: 0 
+    list-style: none 
+    width: 100%
+  li  
+    display: inline-block 
+    width: 100%
+  a  
+    display: block 
+    padding: 6px 12px 
+    text-decoration: none 
+    color: $prim
+    &:hover
+      color: $hover-prim
+
+ 
+
+//* reuseable props
+@mixin grid  
+  display: grid 
+  place-content: center 
+ 
+@mixin grid-row  
+  @include grid 
+  display: grid 
+  grid-template-columns: repeat(3, 1fr) 
+  align-items: center 
+  justify-content: center 
+ 
+@mixin grid-column  
+  @include grid 
+  display: grid 
+  grid-template-columns: auto 
+  align-items: center 
+  justify-content: center 
+ 
+
+@mixin flex  
+  display: flex 
+  justify-content: center 
+  align-items: center 
+ 
+@mixin flex-row  
+  @include flex 
+  flex-direction: row 
+  justify-content: space-between 
+ 
+@mixin flex-column  
+  @include flex 
+  flex-direction: column 
+ 
+@mixin container
+  @include grid
+  border: $border
+  padding: 18px
+  border-radius: $borderRadius
+  background-color: $boxBackground
+
+//* general formatting
+.page
+  min-height: 100vh
+  padding: 42px
+  &.upload
+    @include flex
+    @include flex-column
+    gap: 22px
+  &.visual
+    @include grid
+    gap: 22px
+    @include grid-row
+.hero
+  height: 100vh
+  width: 100vw
+  @include grid
+  &.container
+    width: 400px
+.section
+  min-height: 60vh
+  height: fit-content
+.container  
+  @include grid 
+ 
+.flex-row  
+  @include flex 
+  @include flex-row 
+  
+ 
+.flex-column  
+  @include flex 
+  @include flex-column 
+ 
+.grid-row  
+  @include grid 
+  @include grid-row 
+ 
+.grid-column  
+  @include grid 
+  @include grid-column 
+ 
+
+
+
+//* reusable components
+//* regular button
+button  
+  @include grid 
+  cursor: pointer 
+  padding: 22px 12px 
+  white-space: nowrap 
+  outline: 0 
+  border: 0 
+  font-weight: 600
+  color: #fff
+  border-radius: 4px
+  transition: $hoverAnimate
+  font-size: 18px
+  &.primary  
+    background-color: $prim 
+    min-width: 240px
+    &:hover  
+      background-color: $hover-prim 
+  &.secondary  
+    background-color: $sec 
+    min-width: 240px
+    &:hover  
+      background-color: $hover-sec 
+  &.target
+    background: $prim
+    font-color: #fff
+    width: fit-content
+    width: 36px
+    max-height: 36px
+    font-size: 18px
+     
+   
+ 
+
+//* button with outline
+
+//* commonly used componnets
+// general tags 
+.tag
+  padding: 6px 8px
+  border-radius: $borderRadius
+  white-space: nowrap
+  font-weight: 400
+  font-size: 12px
+  width: fit-content
+  @include flex
+  @include flex-row
+  
+  gap: 4px
+  color: $lighterText
+  background-color: $sec
+  &.clickable
+    &:hover
+      color: #fff
+      background-color: $prim
+      cursor: pointer
+
+  // primary section tag (selected)
+    &.primary
+      color: $text-color
+      background-color: $prim
+      
+.tag-row
+  gap: 8px
+  justify-content: flex-start
+  display: flex
+  flex-direction: row
+
+//* upload section
+.upload-box
+  background-color: $boxBackground
+  height: 300px
+  width: 100%
+  @include grid
+  gap: 12px
+ 
+  background-image: linear-gradient(to right, $outlineColor 20px, transparent 20px), linear-gradient(to left, $outlineColor 20px, transparent 20px), linear-gradient(to bottom, $outlineColor 20px, transparent 20px), linear-gradient(to top, $outlineColor 20px, transparent 20px)
+  background-repeat: repeat-x, repeat-x, repeat-y, repeat-y
+  background-position: top, bottom, left, right
+  background-size: 40px 4px, 40px 4px, 4px 40px, 4px 40px
+  position: relative
+.upload-text
+  color: #fff
+  align-content: center
+  justify-content: center
+  display: flex
+  flex-direction: column
+  gap: 12px
+  & p
+    text-align: center
+    font-size: 18px
+  &.icon-contain
+    width: 100%
+    align-content: center
+    justify-content: center
+    display: flex
+      
+.loading-contain
+  width: -webkit-fill-available
+  gap: 12px
+  @include grid-column
+  @include container
+  justify-content: flex-start
+  & p
+    color: $lighterText
+    font-size: 12px
+.upload-contain
+  @include flex-column
+  width: 100%
+  align-items: flex-start
+
+.demo-contain
+  width: -webkit-fill-available
+  @include grid-column
+  @include container
+  gap: 12px
+.images-contain
+  @include flex-row
+  gap: 22px
+  & img
+    box-sizing: border-box
+    border: 2px solid $boxBackground
+    transition: opacity 200ms ease, border 200ms ease
+    &:hover
+      border: 2px solid $prim
+      cursor: pointer
+    &:not(:hover)
+      opacity: .5
+
+
+//! left panel
+.left-panel
+  width: 20vw
+  @include flex
+  @include flex-column
+  gap: 12px
+//* dataset
+.data-card
+  border: $border
+  padding: 12px
+  background-color: $boxBackground
+  height: fit-content
+  transition: background-color 200ms ease
+  @include flex
+  @include flex-row
+  justify-content: space-between
+  border-radius: $borderRadius
+  min-width: 250px
+  &.left
+    justify-content: flex-start
+    @include flex
+    @include flex-column
+    gap: 4px
+    
+  &:hover
+    background-color: rgba($prim, 0.1)
+    cursor: pointer
+    border: 2px solid $prim
+.dataset-contain
+  @include container
+  padding: 12px
+  gap: 12px
+  width: -webkit-fill-available
+  max-height: 500px
+  overflow-y: scroll
+.main-image img
+  height: 80vh
+  width: 76vw
+.original-image-contain
+  & img
+    width: 320px
+    height: 320px
+    border-radius: $borderRadius
+
+.slider-row-contain
+  display: flex
+  flex-direction: row
+  width: 100%
+  justify-content: space-between
+  align-content: space-between                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 

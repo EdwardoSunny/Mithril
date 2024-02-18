@@ -1,0 +1,5 @@
+* Poopoo Balls Project
+create the following directories in backend/:
+- pix2pix_data/output_data
+- yolo_data
+- user_data
