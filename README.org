@@ -1,4 +1,4 @@
-* Poopoo Balls Project
+* Mithril
 create the following directories in backend/:
 - pix2pix_data/output_data
 - yolo_data
