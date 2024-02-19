@@ -86,24 +86,10 @@ def upload_zip():
         )
 
 
-@app.route("/download")
-def download():
-    output_filename = "processed_data"
-    # Check if the directory exists and is not empty
-    if os.path.exists(download_directory) and os.listdir(download_directory):
-        # Create a temporary directory to store the zip file
-        temp_dir = "./temp_zip/"
-        if not os.path.exists(temp_dir):
-            os.makedirs(temp_dir)
-        zip_path = os.path.join(
-            temp_dir, f"{output_filename}_{datetime.now().strftime('%Y%m%d%H%M%S')}.zip"
-        )
-        # Create zip file
-        shutil.make_archive(zip_path.replace(".zip", ""), "zip", download_directory)
-        # Serve the zip file
-        return send_file(zip_path, as_attachment=True)
-    else:
-        return "The directory is empty or does not exist.", 404
+@app.route('/images/<path:image_name>')
+def get_image(image_name):
+    return send_from_directory('path_to_your_image_folder', image_name)
+
 
 
 if __name__ == "__main__":
